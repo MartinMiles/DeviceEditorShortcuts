@@ -246,11 +246,14 @@ namespace DeviceEditorShortcuts
                         xmlControl["HeaderID"] = obj.ID;
                         xmlControl["Placeholder"] = WebUtil.SafeEncode(renderingDefinition.Placeholder);
 
-                        var dataSourceItem = Client.ContentDatabase.GetItem(renderingDefinition.Datasource);
-                        if (dataSourceItem != null)
+                        if (!string.IsNullOrEmpty(renderingDefinition.Datasource))
                         {
-                            xmlControl["DataSourcePath"] = WebUtil.SafeEncode(dataSourceItem.Paths.FullPath);
-                            xmlControl["DataSourceID"] = WebUtil.SafeEncode(renderingDefinition.Datasource);
+                            var dataSourceItem = Client.ContentDatabase.GetItem(renderingDefinition.Datasource);
+                            if (dataSourceItem != null)
+                            {
+                                xmlControl["DataSourcePath"] = WebUtil.SafeEncode(dataSourceItem.Paths.FullPath);
+                                xmlControl["DataSourceID"] = WebUtil.SafeEncode(renderingDefinition.Datasource);
+                            }
                         }
                     }
                     else
